@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="DeployComposite" default="deployComposite">
+    <property file="build.properties"/>
+    <target name="deployComposite">
+        <echo message="Oracle home : ${ORACLE_HOME}" level="info"></echo>
+        <echo message="Server URL : ${SERVER_URL}" level="info"></echo>
+        <echo message="MDS location : ${MDS_LOCATION}" level="info"></echo>
+        <echo message="Creating jar from file MDS store" level="info"></echo>
+        <ant antfile="${ORACLE_HOME}/jdeveloper/bin/ant-sca-deploy.xml" inheritall="false" target="deploy">
+            <property name="oracle.home" value="${ORACLE_HOME}/jdeveloper"/>
+            <property name="serverURL" value="${SERVER_URL}"/>
+            <property name="user" value="${USER}"/>
+            <property name="password" value="${PASSWORD}"/>
+            <property name="sarLocation" value="${COMPOSITE_DIR}\deploy/sca_${COMPOSITE_NAME}_rev${REVISION}.jar"/>
+            <property name="overwrite" value="true"/>
+            <property name="forceDefault" value="true"/>
+            <property name="partition" value="${PARTITION}"/>
+            <property name="configplan" value="${COMPOSITE_DIR}\${COMPOSITE_NAME}_cfgplan_${ENVIRONMENT}.xml"/>
+        </ant>
+    </target>
+</project>
+

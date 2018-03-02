@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="DeployMds" default="deployMds">
+     <property file="build.properties"/>
+     <target name="deployMds">
+          <echo message="Oracle home : ${ORACLE_HOME}" level="info"></echo>
+          <echo message="Server URL : ${SERVER_URL}" level="info"></echo>
+          <echo message="MDS location : ${MDS_LOCATION}" level="info"></echo>
+          <echo message="Creating jar from file MDS store" level="info"></echo>
+          <zip destfile="${MDS_LOCATION}\soa_mds.jar" compress="false">
+               <fileset dir="${MDS_LOCATION}/apps" includes="**"/>
+          </zip>
+          <echo message="Creating zip with MDS jar" level="info"></echo>
+          <zip destfile="${MDS_LOCATION}\soa_mds.zip" compress="false">
+               <fileset dir="${MDS_LOCATION}" includes="*.jar"/>
+          </zip>
+          <echo message="Deploying MDS app" level="info"></echo>
+          <echo message="Deploying on ${SERVER_URL} with user ${USER}" level="info"></echo>
+          <echo message="Deploying sarFile ${MDS_LOCATION}\soa_mds.zip" level="info"></echo>
+          <ant antfile="${ORACLE_HOME}/jdeveloper/bin/ant-sca-deploy.xml" inheritall="false" target="deploy">
+               <property name="oracle.home" value="${ORACLE_HOME}/jdeveloper"/>
+               <property name="serverURL" value="${SERVER_URL}"/>
+               <property name="user" value="${USER}"/>
+               <property name="password" value="${PASSWORD}"/>
+               <property name="overwrite" value="true"/>
+               <property name="forceDefault" value="true"/>
+               <property name="sarLocation" value="${MDS_LOCATION}/soa_mds.zip"/>
+          </ant>
+     </target>
+</project>

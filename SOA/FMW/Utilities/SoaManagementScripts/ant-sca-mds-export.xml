@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="ExportMds" default="exportMds">
+    <property file="build.properties"/>
+    <property name="environmentType" value="test"/>
+<tstamp>
+     <format property="exportTime" pattern="yyyyMMddHHmmss"/>
+</tstamp>
+    <target name="exportMds">
+        <echo message="Oracle home : ${ORACLE_HOME}" level="info"></echo>
+        <echo message="Server URL : ${SERVER_URL}" level="info"></echo>
+        <echo message="Environment : ${environmentType}" level="info"></echo>
+        <ant antfile="${ORACLE_HOME}/jdeveloper/bin/ant-sca-deploy.xml" inheritall="false" target="exportSharedData">
+            <property name="oracle.home" value="${ORACLE_HOME}/jdeveloper"/>
+            <property name="serverURL" value="${SERVER_URL}"/>
+            <property name="jarFile" value="${MDS_EXPORT_LOCATION}\SOA_MDS_${exportTime}.zip"/>
+            <property name="pattern" value="**"/>
+            <property name="user" value="${USER}"/>
+            <property name="password" value="${PASSWORD}"/>
+        </ant>
+    </target>
+</project>
+
