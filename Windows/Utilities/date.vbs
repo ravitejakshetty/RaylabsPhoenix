@@ -1,3 +1,4 @@
+' Copy datetime to clipboard.
 Dim dd, mm, yy, hh, nn, ss
 Dim datevalue, timevalue, dtsnow, dtsvalue
 Dim WshShell, BtnCode
@@ -26,3 +27,14 @@ dtsvalue = datevalue & " " & timevalue
 oIn.WriteLine dtsvalue
 'oIn.WriteLine "||-------------------------------BEGIN--------------------------------------||"
 oIn.Close
+
+' Open application shortcuts
+Set WshShell = WScript.CreateObject("WScript.Shell")
+
+' Open command prompt 
+WshShell.Run "C:\WINDOWS\system32\cmd.exe /k ""C:\Users\rashe15\AppData\Local\Google\Cloud SDK\cloud_env.bat"" "
+WScript.Sleep 3000 ' Wait for application to open
+
+' Type some text
+WshShell.SendKeys "gcloud cloud-shell ssh"
+WshShell.SendKeys "{ENTER}"
