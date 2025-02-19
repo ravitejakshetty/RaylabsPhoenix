@@ -32,7 +32,7 @@ oIn.Close
 Set WshShell = WScript.CreateObject("WScript.Shell")
 
 ' Open command prompt 
-WshShell.Run "C:\WINDOWS\system32\cmd.exe /k ""C:\Users\rashe15\AppData\Local\Google\Cloud SDK\cloud_env.bat"" "
+WshShell.Run "C:\WINDOWS\system32\cmd.exe /k ""C:\Users\xxx\AppData\Local\Google\Cloud SDK\cloud_env.bat"" "
 WScript.Sleep 3000 ' Wait for application to open
 
 ' Type some text
